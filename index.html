@@ -1,0 +1,964 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ProofPilot AI — Deploy AI broadly without losing control</title>
+  <meta name="description" content="ProofPilot helps large organizations deploy AI broadly, securely, and under enterprise control. ProofOS is the agent assurance control plane; ProofPilot is the expert team that deploys, integrates, and assures it — managed, private, or on your own stack." />
+  <meta property="og:title" content="ProofPilot AI — From AI pilot to operating advantage" />
+  <meta property="og:description" content="We convert stalled GenAI pilots into governed, secure, ROI-instrumented production workflows." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#101820" />
+  <link rel="canonical" href="https://proofpilot.ai/" />
+
+  <!--
+    ProofPilot AI — boardroom landing page
+    Tailwind CDN is used for fast launch. For production, compile Tailwind locally.
+    BEFORE PUBLISHING: replace the scheduler placeholder link (search for "REPLACE-SCHEDULER").
+    Email CTAs are wired to lc@federal.ai.
+  -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'ui-sans-serif', 'system-ui', 'Segoe UI', 'Helvetica Neue', 'Arial', 'sans-serif'],
+            display: ['Newsreader', 'Georgia', 'serif']
+          },
+          colors: {
+            ink: '#101820',
+            board: '#17221e',
+            pine: '#1f5f4a',
+            moss: '#e5efe8',
+            paper: '#f7f3ea',
+            pearl: '#fbfaf7',
+            brass: '#b58a54',
+            chalk: '#e9e2d5',
+            muted: '#5e665f'
+          },
+          boxShadow: {
+            soft: '0 30px 90px rgba(16, 24, 32, .12)',
+            lift: '0 24px 60px rgba(16, 24, 32, .16)',
+            line: 'inset 0 0 0 1px rgba(16,24,32,.10)'
+          }
+        }
+      }
+    }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "ProofPilot AI",
+    "slogan": "From AI pilot to operating advantage.",
+    "description": "Secure enterprise AI operations. ProofOS is an agent assurance control plane for governing AI agents, models, and workflows; ProofPilot provides implementation, forward-deployed engineering, and continuous assurance for commercial and federal organizations.",
+    "email": "lc@federal.ai",
+    "founder": {
+      "@type": "Person",
+      "name": "Lloyd Clark",
+      "honorificSuffix": "Ph.D.",
+      "jobTitle": "Founder",
+      "alumniOf": "Capitol Technology University"
+    },
+    "areaServed": "US",
+    "knowsAbout": ["AI implementation", "AI governance", "CMMC", "NIST SP 800-171", "federal proposal operations", "workflow automation"]
+  }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;0,6..72,700;0,6..72,800;1,6..72,500;1,6..72,600;1,6..72,700;1,6..72,800&display=swap');
+
+    :root { color-scheme: light; }
+    ::selection { background: rgba(31,95,74,.16); }
+    /* Paper grain: print-like texture over the whole page */
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 80;
+      pointer-events: none;
+      opacity: .038;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+    body {
+      background:
+        radial-gradient(circle at 8% 0%, rgba(31,95,74,.11), transparent 29rem),
+        radial-gradient(circle at 95% 6%, rgba(181,138,84,.12), transparent 27rem),
+        linear-gradient(180deg, #fbfaf7 0%, #f7f3ea 48%, #fbfaf7 100%);
+    }
+    .fine-grid {
+      background-image:
+        linear-gradient(rgba(16,24,32,.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(16,24,32,.055) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: linear-gradient(to bottom, black, rgba(0,0,0,.55), transparent 88%);
+    }
+    .board-gradient {
+      background:
+        radial-gradient(circle at 18% 15%, rgba(229,239,232,.12), transparent 32%),
+        radial-gradient(circle at 82% 0%, rgba(181,138,84,.16), transparent 28%),
+        linear-gradient(135deg, #101820 0%, #17221e 52%, #21362d 100%);
+    }
+    .rule:before {
+      content: '';
+      display: block;
+      width: 56px;
+      height: 1px;
+      background: #b58a54;
+      margin-bottom: 18px;
+    }
+    .editorial-card {
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.90), rgba(255,255,255,.70)),
+        #fbfaf7;
+      box-shadow: inset 0 0 0 1px rgba(16,24,32,.10), 0 30px 90px rgba(16,24,32,.10);
+    }
+    .dark-card {
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.02)),
+        #101820;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.10), 0 30px 90px rgba(16,24,32,.22);
+    }
+    .small-caps { letter-spacing: .18em; text-transform: uppercase; }
+    .button-arrow svg { transition: transform .22s ease; }
+    .button-arrow:hover svg { transform: translateX(4px); }
+    .marquee-mask { mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
+    .tally {
+      background-image: linear-gradient(90deg, rgba(181,138,84,.28) 1px, transparent 1px);
+      background-size: 14px 1px;
+    }
+    .demo-step:not(:last-child)::after {
+      content: '→';
+      margin: 0 .35rem;
+      color: rgba(233,226,213,.45);
+    }
+    /* BlurFade (ported from Magic UI blur-fade: y 6px, blur 6px, ease-out) */
+    .motion-ok [data-bf],
+    .motion-ok .bf-child {
+      opacity: 0;
+      transform: translateY(12px);
+      filter: blur(6px);
+      transition: opacity .5s ease-out, transform .5s ease-out, filter .5s ease-out;
+      transition-delay: var(--bf-delay, .04s);
+      will-change: opacity, transform, filter;
+    }
+    .motion-ok .bf-in {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+    }
+    [data-ticker] { font-variant-numeric: tabular-nums; }
+  </style>
+  <script>
+    // Gate all motion on user preference, applied before first paint to avoid flicker
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.documentElement.classList.add('motion-ok');
+    }
+  </script>
+</head>
+<body class="min-h-screen overflow-x-hidden bg-pearl text-ink antialiased">
+  <div class="fine-grid pointer-events-none fixed inset-x-0 top-0 h-[760px] opacity-80"></div>
+
+  <!-- Navigation -->
+  <header class="fixed inset-x-0 top-0 z-50 border-b border-ink/10 bg-pearl/88 backdrop-blur-xl">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-6 lg:px-8">
+      <a href="#top" class="group flex items-center gap-3" aria-label="ProofPilot AI home">
+        <span class="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-[9px] bg-ink font-display text-lg font-bold tracking-tight text-paper shadow-line">
+          <span class="absolute inset-x-0 top-0 h-1/2 bg-white/10"></span>
+          PP
+        </span>
+        <span class="text-base font-black tracking-[-.02em] text-ink">ProofPilot <span class="font-semibold text-pine">AI</span></span>
+      </a>
+
+      <nav class="hidden items-center gap-8 text-[13px] font-bold text-ink/62 md:flex">
+        <a class="transition hover:text-ink" href="#proofos">ProofOS</a>
+        <a class="transition hover:text-ink" href="#deployment">Deployment</a>
+        <a class="transition hover:text-ink" href="#security">Security</a>
+        <a class="transition hover:text-ink" href="#sprint">Sprint</a>
+        <a class="transition hover:text-ink" href="#markets">Markets</a>
+        <a class="transition hover:text-ink" href="#founder">Founder</a>
+      </nav>
+
+      <a href="#contact" class="button-arrow hidden items-center rounded-full bg-ink px-5 py-2.5 text-sm font-extrabold text-paper transition hover:bg-pine md:inline-flex">
+        Request briefing
+        <svg class="ml-2 h-4 w-4" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h11m0 0-4-4m4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="#contact" class="inline-flex rounded-full bg-ink px-4 py-2 text-sm font-extrabold text-paper md:hidden">Briefing</a>
+    </div>
+  </header>
+
+  <main id="top" class="relative z-10">
+    <!-- Hero -->
+    <section class="relative px-5 pb-16 pt-24 sm:px-6 sm:pt-28 lg:px-8 lg:pb-24">
+      <div class="mx-auto max-w-7xl">
+        <div class="grid gap-10 lg:grid-cols-[1.04fr_.96fr] lg:items-center lg:gap-16">
+          <div class="min-w-0">
+            <p data-bf class="small-caps mb-9 flex flex-wrap items-center gap-x-4 gap-y-2 text-[11px] font-black text-ink/50">
+              <span class="inline-block h-px w-12 bg-brass"></span>
+              Executive brief · Secure enterprise AI operations · For operating leaders
+            </p>
+
+            <h1 data-bf style="--bf-delay:.12s" class="max-w-5xl font-display text-[3.4rem] font-bold leading-[.92] tracking-[-.05em] text-ink sm:text-[4.75rem] lg:text-[6rem]">
+              From AI pilot to <span class="italic text-pine">operating advantage.</span>
+            </h1>
+
+            <p data-bf style="--bf-delay:.22s" class="mt-8 max-w-2xl text-xl leading-9 text-ink/68 sm:text-2xl sm:leading-10">
+              Deploy AI broadly without losing control. ProofOS is a secure, model-independent control plane for enterprise AI — and ProofPilot is the expert team that assesses, deploys, and assures it inside complex organizations.
+            </p>
+
+            <div data-bf style="--bf-delay:.32s" class="mt-10 flex flex-col gap-3 sm:flex-row">
+              <a href="#contact" class="button-arrow inline-flex items-center justify-center rounded-full bg-pine px-7 py-4 text-base font-black text-white shadow-lift transition hover:-translate-y-0.5 hover:bg-ink">
+                Request an executive briefing
+                <svg class="ml-2 h-5 w-5" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h11m0 0-4-4m4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+              <a href="#proofos" class="inline-flex items-center justify-center rounded-full border border-ink/15 bg-white/75 px-7 py-4 text-base font-extrabold text-ink shadow-line transition hover:-translate-y-0.5 hover:border-pine/30 hover:bg-white">
+                Explore ProofOS
+              </a>
+            </div>
+
+            <div data-bf style="--bf-delay:.42s" class="mt-12 grid max-w-3xl grid-cols-1 gap-7 border-t-2 border-ink pt-7 sm:grid-cols-3">
+              <div>
+                <p class="font-display text-4xl font-bold tracking-[-.04em] text-ink"><span data-ticker="10">10</span>–<span data-ticker="15" data-ticker-delay="0.3">15</span></p>
+                <p class="mt-2 text-sm leading-6 text-ink/60">business days from kickoff to a deployed, measured workflow</p>
+              </div>
+              <div>
+                <p class="font-display text-4xl font-bold tracking-[-.04em] text-ink">1</p>
+                <p class="mt-2 text-sm leading-6 text-ink/60">high-value workflow deployed, governed, and instrumented — not a slide deck</p>
+              </div>
+              <div>
+                <p class="font-display text-4xl font-bold tracking-[-.04em] text-ink">CFO+CISO</p>
+                <p class="mt-2 text-sm leading-6 text-ink/60">ROI, risk, adoption, and control evidence both can defend</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hero executive memo visual -->
+          <div data-bf style="--bf-delay:.25s" class="relative min-w-0 lg:pb-5">
+            <div class="absolute -inset-8 rounded-[1.4rem] bg-gradient-to-br from-pine/10 via-brass/10 to-transparent blur-3xl"></div>
+            <div class="editorial-card relative overflow-hidden rounded-[1.15rem]">
+              <div class="border-b border-ink/10 px-6 py-5 sm:px-7">
+                <div class="flex items-center justify-between gap-4">
+                  <div>
+                    <p class="small-caps text-[11px] font-black text-pine">Board memorandum</p>
+                    <h2 class="mt-2 font-display text-3xl font-bold tracking-[-.045em]">AI value realization</h2>
+                  </div>
+                  <span class="rounded-full bg-moss px-3 py-1 text-xs font-extrabold text-pine">Decision-ready</span>
+                </div>
+              </div>
+              <div class="p-6 sm:p-7">
+                <p class="text-[13px] font-extrabold uppercase tracking-[.18em] text-ink/45">The board question</p>
+                <p class="mt-3 font-display text-4xl font-bold leading-[1.02] tracking-[-.045em] text-ink">
+                  Which AI workflows deserve capital, governance, and scale?
+                </p>
+
+                <div class="mt-7 grid gap-3 sm:grid-cols-2">
+                  <div class="rounded-lg border border-ink/10 bg-pearl p-5">
+                    <p class="small-caps text-[10px] font-black text-ink/42">Market signal</p>
+                    <p class="mt-3 font-display text-5xl font-bold tracking-[-.06em] text-pine">~<span data-ticker="5">5</span>%</p>
+                    <p class="mt-2 text-sm font-semibold leading-6 text-ink/60">of enterprise GenAI pilots achieved rapid revenue acceleration — MIT NANDA's "GenAI Divide," as covered by Fortune.</p>
+                  </div>
+                  <div class="rounded-lg border border-ink/10 bg-ink p-5 text-paper">
+                    <p class="small-caps text-[10px] font-black text-paper/50">Execution signal</p>
+                    <p class="mt-3 font-display text-5xl font-bold tracking-[-.06em] text-chalk">~<span data-ticker="2" data-ticker-delay="0.35">2</span>×</p>
+                    <p class="mt-2 text-sm font-semibold leading-6 text-paper/64">the reported deployment success rate when firms partnered with specialized external providers rather than building alone, per the same coverage.</p>
+                  </div>
+                </div>
+
+                <div class="mt-7 rounded-lg border border-brass/25 bg-brass/10 p-5">
+                  <p class="text-sm font-black text-ink">ProofPilot mandate</p>
+                  <p class="mt-2 text-sm leading-7 text-ink/68">Move the organization from scattered tools and executive anxiety to one production workflow with an owner, a control boundary, an adoption plan, and a measurable operating result.</p>
+                </div>
+
+                <div class="mt-7 grid grid-cols-4 gap-2 text-center text-[11px] font-black uppercase tracking-[.14em] text-ink/48">
+                  <div class="rounded-md bg-white px-2 py-3 shadow-line">Diagnose</div>
+                  <div class="rounded-md bg-white px-2 py-3 shadow-line">Deploy</div>
+                  <div class="rounded-md bg-white px-2 py-3 shadow-line">Govern</div>
+                  <div class="rounded-md bg-pine px-2 py-3 text-white shadow-line">Prove</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Context strip -->
+    <section class="px-5 pb-12 sm:px-6 lg:px-8">
+      <div data-bf class="mx-auto max-w-7xl border-y border-ink/12 py-5">
+        <div class="flex flex-wrap items-center justify-center gap-x-9 gap-y-3 text-[11px] font-black uppercase tracking-[.18em] text-ink/45">
+          <span>Workflow redesign</span>
+          <span class="h-1 w-1 rounded-full bg-brass"></span>
+          <span>Secure integrations</span>
+          <span class="h-1 w-1 rounded-full bg-brass"></span>
+          <span>Retrieval &amp; tool use</span>
+          <span class="h-1 w-1 rounded-full bg-brass"></span>
+          <span>Evals &amp; monitoring</span>
+          <span class="h-1 w-1 rounded-full bg-brass"></span>
+          <span>Human-in-the-loop review</span>
+          <span class="h-1 w-1 rounded-full bg-brass"></span>
+          <span>KPI-driven deployment</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Thesis -->
+    <section id="thesis" class="px-5 py-20 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-7xl">
+        <div class="grid gap-12 lg:grid-cols-[.72fr_1.28fr] lg:gap-16">
+          <div data-bf class="rule">
+            <p class="small-caps text-xs font-black text-pine">§ 01 — The thesis</p>
+            <h2 class="mt-4 font-display text-5xl font-bold leading-[.98] tracking-[-.055em] sm:text-6xl">AI is not failing at the model layer.</h2>
+          </div>
+          <div data-bf-stagger class="grid gap-x-10 gap-y-10 sm:grid-cols-2">
+            <div class="border-t-2 border-ink pt-6">
+              <p class="small-caps text-[11px] font-black text-brass">Position 01</p>
+              <p class="mt-3 font-display text-3xl font-bold tracking-[-.045em]">It is failing at the operating layer.</p>
+              <p class="mt-4 text-base leading-8 text-ink/65">Most organizations already have access to capable models. What they lack is workflow redesign, data boundaries, executive ownership, user adoption, risk controls, and measurement.</p>
+            </div>
+            <div class="border-t-2 border-ink pt-6">
+              <p class="small-caps text-[11px] font-black text-brass">Position 02</p>
+              <p class="mt-3 font-display text-3xl font-bold tracking-[-.045em]">The advantage goes to the implementer.</p>
+              <p class="mt-4 text-base leading-8 text-ink/65">ProofPilot sits between strategy consulting, AI engineering, cybersecurity, and change management — the seam where pilots either become operating capability or quietly die.</p>
+            </div>
+            <div class="border-t border-ink/20 pt-6 sm:col-span-2">
+              <div class="grid gap-6 md:grid-cols-[.82fr_1.18fr] md:items-center">
+                <div>
+                  <p class="small-caps text-xs font-black text-brass">Position 03 — Why now</p>
+                  <p class="mt-3 font-display text-4xl font-bold leading-[1.02] tracking-[-.045em]">Executives need operating leverage without uncontrolled AI risk.</p>
+                </div>
+                <p class="text-base leading-8 text-ink/65">AI adoption is now moving faster than enterprise governance — the risk is no longer experimentation, it is fragmented control. The credible AI pitch is not another pilot. It is a governed workflow that reduces cycle time, strengthens compliance, and produces evidence the CFO and CISO can both defend.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ProofOS -->
+    <section id="proofos" class="px-5 py-20 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-7xl">
+        <div data-bf class="rule max-w-4xl">
+          <p class="small-caps text-xs font-black text-pine">§ 02 — ProofOS</p>
+          <h2 class="mt-5 font-display text-5xl font-bold leading-[.98] tracking-[-.055em] sm:text-6xl">One control plane for enterprise AI.</h2>
+          <p class="mt-6 max-w-3xl text-lg leading-8 text-ink/62">Most enterprises already have AI experimentation. The growing problem is fragmented control: no one can say what AI systems exist, who owns them, what data they touch, how they were evaluated, or what they cost. ProofOS is an agent assurance control plane — one governed layer to inventory, test, approve, deploy, and continuously improve AI agents across models, vendors, departments, and environments.</p>
+          <p class="mt-4 max-w-3xl text-base leading-8 text-ink/62"><strong class="text-ink">ProofOS is the product and the operating standard. ProofPilot is the expert organization</strong> that assesses, integrates, deploys, extends, operates, and assures it.</p>
+        </div>
+
+        <!-- Control plane / execution plane diagram -->
+        <div data-bf style="--bf-delay:.15s" class="mt-12 rounded-[1.15rem] border border-ink/10 bg-white/80 p-5 shadow-line sm:p-8">
+          <div class="rounded-lg bg-ink p-5 text-paper">
+            <div class="flex flex-wrap items-center justify-between gap-3">
+              <p class="font-display text-2xl font-bold tracking-[-.03em]">ProofOS Control Plane</p>
+              <p class="small-caps text-[10px] font-black text-chalk/60">Specifications · Evaluations · Approvals · Evidence · Cost · Risk</p>
+            </div>
+          </div>
+          <div class="flex items-center justify-center gap-4 py-4 text-[10px] font-black uppercase tracking-[.16em] text-ink/45">
+            <span class="h-5 w-px bg-brass"></span>
+            Governs by policy and evidence — raw sensitive data does not cross the line
+            <span class="h-5 w-px bg-brass"></span>
+          </div>
+          <div class="rounded-lg border-2 border-dashed border-pine/45 bg-moss/40 p-5">
+            <p class="small-caps text-[10px] font-black text-pine">Your security boundary — commercial cloud, your cloud, on-premises, GovCloud, disconnected, or air-gapped</p>
+            <div class="mt-4 grid gap-3 sm:grid-cols-3">
+              <div class="rounded-md bg-white p-4 shadow-line">
+                <p class="text-sm font-black">Execution plane</p>
+                <p class="mt-1 text-xs leading-5 text-ink/55">Agents and workflows run beside your systems, under your identity and credentials.</p>
+              </div>
+              <div class="rounded-md bg-white p-4 shadow-line">
+                <p class="text-sm font-black">Your data systems</p>
+                <p class="mt-1 text-xs leading-5 text-ink/55">Authoritative data stays in the systems where it already resides. No forced relocation.</p>
+              </div>
+              <div class="rounded-md bg-white p-4 shadow-line">
+                <p class="text-sm font-black">Your models &amp; keys</p>
+                <p class="mt-1 text-xs leading-5 text-ink/55">Frontier, government-approved, or local models — with customer-owned encryption keys where required.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Capabilities -->
+        <div data-bf-stagger class="mt-12 grid gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
+          <div class="border-t-2 border-ink pt-4"><p class="font-black">Enterprise AI Registry</p><p class="mt-2 text-sm leading-6 text-ink/60">Every use case, agent, model, owner, data permission, cost, and deployment status in one portfolio view.</p></div>
+          <div class="border-t-2 border-ink pt-4"><p class="font-black">Agent Specification &amp; Policy</p><p class="mt-2 text-sm leading-6 text-ink/60">A versioned, machine-readable definition of what each agent may do — with which data, models, tools, and approvals.</p></div>
+          <div class="border-t-2 border-ink pt-4"><p class="font-black">Evaluation Factory</p><p class="mt-2 text-sm leading-6 text-ink/60">Domain evaluations, expert examples, regression and adversarial testing, grounding verification, latency and cost measurement.</p></div>
+          <div class="border-t-2 border-ink pt-4"><p class="font-black">Governed Release</p><p class="mt-2 text-sm leading-6 text-ink/60">A controlled path from draft through evaluation, security review, business approval, shadow operation, and production.</p></div>
+          <div class="border-t-2 border-ink pt-4"><p class="font-black">Runtime Assurance</p><p class="mt-2 text-sm leading-6 text-ink/60">Evidence for every consequential step: model, specification version, sources, tool calls, approvals, outputs, and corrections.</p></div>
+          <div class="border-t-2 border-ink pt-4"><p class="font-black">Model &amp; Cost Optimization</p><p class="mt-2 text-sm leading-6 text-ink/60">Route workloads across frontier, approved, and private models by security, quality, latency, and cost.</p></div>
+          <div class="border-t-2 border-ink pt-4 sm:col-span-2 lg:col-span-3"><p class="font-black">Executive Control Plane</p><p class="mt-2 max-w-3xl text-sm leading-6 text-ink/60">The leadership view: the enterprise AI portfolio, risk posture, evaluation health, operating cost, business value, and the decisions waiting on you.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Deployment models -->
+    <section id="deployment" class="px-5 py-20 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-7xl">
+        <div data-bf class="rule max-w-4xl">
+          <p class="small-caps text-xs font-black text-pine">§ 03 — Deployment models</p>
+          <h2 class="mt-5 font-display text-5xl font-bold leading-[.98] tracking-[-.055em] sm:text-6xl">Buy the platform. Run it inside your boundary. Or build on the standard.</h2>
+          <p class="mt-6 max-w-3xl text-lg leading-8 text-ink/62">Three ways to adopt the same ProofOS standard — chosen by your security posture and platform strategy, not ours. None requires surrendering your data estate to a vendor.</p>
+        </div>
+
+        <div data-bf-stagger class="mt-12 grid gap-x-10 gap-y-12 lg:grid-cols-3">
+          <div class="border-t-2 border-ink pt-6">
+            <p class="small-caps text-[11px] font-black text-brass">Model 01</p>
+            <h3 class="mt-3 font-display text-3xl font-bold tracking-[-.045em]">ProofOS Managed</h3>
+            <p class="small-caps mt-2 text-[11px] font-black text-pine">Ready to operate · Fully supported</p>
+            <p class="mt-4 text-sm leading-7 text-ink/62">An enterprise-grade platform operated by ProofPilot — hosting, updates, evaluation infrastructure, observability, support, and security maintenance. You retain control over approved users, models, data connections, agents, business rules, retention, and deployment approvals.</p>
+            <p class="mt-3 text-sm leading-7 text-ink/62"><span class="font-bold text-ink">For</span> — organizations that want AI capability without building and maintaining another internal platform.</p>
+          </div>
+
+          <div class="border-t-2 border-pine pt-6">
+            <p class="small-caps text-[11px] font-black text-brass">Model 02</p>
+            <h3 class="mt-3 font-display text-3xl font-bold tracking-[-.045em]">ProofOS Private</h3>
+            <p class="small-caps mt-2 text-[11px] font-black text-pine">Inside your boundary · Designed for regulated and mission environments</p>
+            <p class="mt-4 text-sm leading-7 text-ink/62">ProofOS deployed in your AWS, Azure, Google Cloud, GovCloud, Kubernetes, OpenShift, data-center, disconnected, or air-gapped environment. You control the infrastructure, network boundary, identity, encryption keys, credentials, source data, models, retention, and final authorization. We provide signed deployment artifacts, infrastructure automation, security documentation, implementation, upgrades, and long-term support.</p>
+            <p class="mt-3 text-sm leading-7 text-ink/62"><span class="font-bold text-ink">For</span> — Fortune 500s, financial institutions, healthcare organizations, defense contractors, and government agencies.</p>
+          </div>
+
+          <div class="border-t-2 border-ink pt-6">
+            <p class="small-caps text-[11px] font-black text-brass">Model 03</p>
+            <h3 class="mt-3 font-display text-3xl font-bold tracking-[-.045em]">ProofOS Blueprint</h3>
+            <p class="small-caps mt-2 text-[11px] font-black text-pine">Your build · Our standard</p>
+            <p class="mt-4 text-sm leading-7 text-ink/62">For enterprises with mature platform capability that will not adopt another proprietary control plane: the ProofOS reference architecture, Agent Specification Standard, governance schemas, evaluation frameworks, integration accelerators, and forward-deployed engineers. Integrates with Microsoft, AWS, Google Cloud, Palantir, Databricks, ServiceNow, Salesforce, and internal platforms.</p>
+            <p class="mt-3 text-sm leading-7 text-ink/62"><span class="font-bold text-ink">For</span> — teams that build and own their implementation. A deliberate enterprise option, not a fallback.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Security & data sovereignty -->
+    <section id="security" class="px-5 py-20 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-7xl">
+        <div class="rounded-[1.4rem] bg-ink p-8 text-paper shadow-soft sm:p-10 lg:p-14">
+          <div data-bf class="max-w-4xl">
+            <p class="small-caps text-xs font-black text-chalk/60">§ 04 — Security &amp; data sovereignty</p>
+            <h2 class="mt-5 font-display text-5xl font-bold leading-[.98] tracking-[-.055em] sm:text-6xl">Your data estate is not the price of admission.</h2>
+            <p class="mt-6 max-w-3xl text-lg leading-8 text-paper/66">Large organizations should not have to place their data inside a small vendor's platform to govern their AI. ProofOS governs specifications, evaluations, approvals, and evidence — authoritative data remains in the systems where it already resides.</p>
+          </div>
+
+          <div data-bf-stagger class="mt-12 grid gap-x-10 gap-y-7 sm:grid-cols-2">
+            <div class="border-t border-white/20 pt-4"><p class="font-black text-paper">Never trained on your data</p><p class="mt-1 text-sm leading-6 text-paper/58">Customer data is not used to train shared models. No forced data relocation.</p></div>
+            <div class="border-t border-white/20 pt-4"><p class="font-black text-paper">Customer-controlled deployment</p><p class="mt-1 text-sm leading-6 text-paper/58">Commercial cloud, your cloud, on-premises, GovCloud, disconnected, and air-gapped environments.</p></div>
+            <div class="border-t border-white/20 pt-4"><p class="font-black text-paper">Your keys, your identity</p><p class="mt-1 text-sm leading-6 text-paper/58">Customer-owned encryption keys and customer-controlled identity where required.</p></div>
+            <div class="border-t border-white/20 pt-4"><p class="font-black text-paper">Model and infrastructure independence</p><p class="mt-1 text-sm leading-6 text-paper/58">No single-vendor dependency — frontier, government-approved, private open-weight, and specialized small models.</p></div>
+            <div class="border-t border-white/20 pt-4"><p class="font-black text-paper">Least privilege, human approval</p><p class="mt-1 text-sm leading-6 text-paper/58">Agents get the minimum tool access their specification allows; consequential actions require human approval.</p></div>
+            <div class="border-t border-white/20 pt-4"><p class="font-black text-paper">Separation of planes</p><p class="mt-1 text-sm leading-6 text-paper/58">The control plane governs; execution runs beside your systems, inside your boundary.</p></div>
+            <div class="border-t border-white/20 pt-4"><p class="font-black text-paper">Configurable retention</p><p class="mt-1 text-sm leading-6 text-paper/58">Telemetry and content retention set by your policy, not ours.</p></div>
+            <div class="border-t border-white/20 pt-4"><p class="font-black text-paper">Exportable by design</p><p class="mt-1 text-sm leading-6 text-paper/58">Specifications, evaluations, and evidence export over standards-based APIs. Leaving is always possible.</p></div>
+          </div>
+
+          <p class="mt-10 border-t border-white/15 pt-5 text-xs leading-6 text-paper/45">The ProofOS architecture is designed to support NIST-aligned AI governance and secure agentic practices. We do not claim FedRAMP authorization, SOC 2, ISO certification, or an Authority to Operate; compliance posture is addressed per engagement.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sprint -->
+    <section id="sprint" class="px-5 py-20 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-7xl">
+        <div data-bf class="board-gradient overflow-hidden rounded-[1.4rem] text-paper shadow-soft">
+          <div class="grid gap-0 lg:grid-cols-[.92fr_1.08fr]">
+            <div class="p-8 sm:p-12 lg:p-14">
+              <p class="small-caps text-xs font-black text-chalk/65">§ 05 — Flagship engagement</p>
+              <h2 class="mt-5 font-display text-5xl font-bold leading-[.98] tracking-[-.055em] sm:text-6xl">The ProofPilot Sprint</h2>
+              <p class="mt-6 max-w-xl text-lg leading-8 text-paper/70">A fixed-scope executive implementation engagement to select, deploy, govern, and measure one high-value AI workflow — before the organization commits capital to scale. Every Sprint deploys on the ProofOS standard, so the first workflow ships governed, evaluated, and evidenced from day one.</p>
+              <p class="small-caps mt-8 border-t border-white/15 pt-5 text-[11px] font-black leading-6 tracking-[.18em] text-paper/60">10–15 business days · Fixed scope agreed before kickoff · Board-ready results memo</p>
+              <a href="#contact" class="button-arrow mt-10 inline-flex items-center rounded-full bg-paper px-7 py-4 text-base font-black text-ink transition hover:-translate-y-0.5 hover:bg-chalk">
+                Discuss a Sprint
+                <svg class="ml-2 h-5 w-5" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h11m0 0-4-4m4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+            </div>
+
+            <div class="border-t border-white/10 p-8 sm:p-12 lg:border-l lg:border-t-0 lg:p-14">
+              <div class="divide-y divide-white/12">
+                <div class="flex gap-5 pb-6">
+                  <span class="font-display text-3xl font-bold text-chalk">01</span>
+                  <div>
+                    <p class="font-black text-paper">Executive selection</p>
+                    <p class="mt-1 text-sm leading-6 text-paper/58">Choose the workflow with clear economics, an accountable owner, and an acceptable risk boundary.</p>
+                  </div>
+                </div>
+                <div class="flex gap-5 py-6">
+                  <span class="font-display text-3xl font-bold text-chalk">02</span>
+                  <div>
+                    <p class="font-black text-paper">Secure build</p>
+                    <p class="mt-1 text-sm leading-6 text-paper/58">Deploy a source-grounded workflow using approved data, model access, identity controls, and human review.</p>
+                  </div>
+                </div>
+                <div class="flex gap-5 py-6">
+                  <span class="font-display text-3xl font-bold text-chalk">03</span>
+                  <div>
+                    <p class="font-black text-paper">Adoption and proof</p>
+                    <p class="mt-1 text-sm leading-6 text-paper/58">Train the users, instrument usage, calculate cycle-time impact, and package the scale/no-scale decision.</p>
+                  </div>
+                </div>
+                <div class="pt-6">
+                  <p class="small-caps text-[11px] font-black text-brass">Deliverables</p>
+                  <p class="mt-2 text-sm leading-7 text-paper/66">Working workflow, ROI baseline, risk register, evaluation suite, monitoring and usage visibility, user SOP, and executive readout.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Engagement ladder -->
+    <section id="engagements" class="px-5 py-20 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-7xl">
+        <div data-bf class="rule max-w-4xl">
+          <p class="small-caps text-xs font-black text-pine">§ 06 — Engagement model</p>
+          <h2 class="mt-5 font-display text-5xl font-bold leading-[.98] tracking-[-.055em] sm:text-6xl">A deliberate path. No open-ended retainers to start.</h2>
+          <p class="mt-6 max-w-3xl text-lg leading-8 text-ink/62">Every engagement is fixed-scope with defined deliverables. This work is designed for teams prepared to invest seriously in production AI implementation — not one-off chatbot experiments. A complete fee schedule is available in the briefing.</p>
+          <p class="small-caps mt-7 text-[11px] font-black leading-6 tracking-[.18em] text-ink/45">Method: Assess → Prioritize → Pilot → Operationalize → Scale → Assure</p>
+        </div>
+
+        <div data-bf-stagger class="mt-12 border-t-2 border-ink">
+          <div class="grid gap-x-8 gap-y-3 border-b border-ink/15 py-8 md:grid-cols-[3rem_1.05fr_1.25fr_.9fr]">
+            <p class="font-display text-2xl font-bold text-brass">01</p>
+            <div>
+              <h3 class="font-display text-3xl font-bold tracking-[-.045em]">Executive Briefing</h3>
+              <p class="small-caps mt-2 text-[11px] font-black text-pine">Complimentary · 30 minutes</p>
+            </div>
+            <p class="text-sm leading-7 text-ink/62">A working session: your AI pilot inventory, the highest-value workflow, and whether a deeper engagement makes sense — for both sides.</p>
+            <p class="text-sm leading-7 text-ink/62"><span class="font-bold text-ink">Outcome</span> — clarity on where to start.</p>
+          </div>
+
+          <div class="grid gap-x-8 gap-y-3 border-b border-ink/15 py-8 md:grid-cols-[3rem_1.05fr_1.25fr_.9fr]">
+            <p class="font-display text-2xl font-bold text-brass">02</p>
+            <div>
+              <h3 class="font-display text-3xl font-bold tracking-[-.045em]">Executive Diagnostic</h3>
+              <p class="small-caps mt-2 text-[11px] font-black text-pine">Fixed fee · one week</p>
+            </div>
+            <p class="text-sm leading-7 text-ink/62">A structured inventory of every AI pilot and candidate workflow, ranked by ROI and risk, with a data-sensitivity map and a 90-day roadmap.</p>
+            <p class="text-sm leading-7 text-ink/62"><span class="font-bold text-ink">Outcome</span> — ranked roadmap and risk map.</p>
+          </div>
+
+          <div class="grid gap-x-8 gap-y-3 border-b border-ink/15 py-8 md:grid-cols-[3rem_1.05fr_1.25fr_.9fr]">
+            <p class="font-display text-2xl font-bold text-brass">03</p>
+            <div>
+              <h3 class="font-display text-3xl font-bold tracking-[-.045em]">ProofPilot Sprint <span class="ml-2 inline-block translate-y-[-3px] rounded-full bg-pine px-2.5 py-1 align-middle text-[10px] font-black uppercase tracking-[.14em] text-white">Flagship</span></h3>
+              <p class="small-caps mt-2 text-[11px] font-black text-pine">Fixed scope · 10–15 business days</p>
+            </div>
+            <p class="text-sm leading-7 text-ink/62">One high-value workflow deployed into production with security boundaries, human review, user training, and ROI instrumentation. Closes with a board-ready scale/no-scale memo.</p>
+            <p class="text-sm leading-7 text-ink/62"><span class="font-bold text-ink">Outcome</span> — a working, governed, measured workflow.</p>
+          </div>
+
+          <div class="grid gap-x-8 gap-y-3 border-b border-ink/15 py-8 md:grid-cols-[3rem_1.05fr_1.25fr_.9fr]">
+            <p class="font-display text-2xl font-bold text-brass">04</p>
+            <div>
+              <h3 class="font-display text-3xl font-bold tracking-[-.045em]">ProofPilot Operate</h3>
+              <p class="small-caps mt-2 text-[11px] font-black text-pine">Monthly · scaled to scope</p>
+            </div>
+            <p class="text-sm leading-7 text-ink/62">Ongoing capability after a successful Sprint: monthly workflow releases, forward-deployed engineering, evaluation and governance upkeep, user training, and executive reporting.</p>
+            <p class="text-sm leading-7 text-ink/62"><span class="font-bold text-ink">Outcome</span> — compounding operating leverage.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Markets -->
+    <section id="markets" class="px-5 py-20 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-7xl">
+        <div data-bf class="rule max-w-4xl">
+          <p class="small-caps text-xs font-black text-pine">§ 07 — Two fronts, one engine</p>
+          <h2 class="mt-5 font-display text-5xl font-bold leading-[.98] tracking-[-.055em] sm:text-6xl">Commercial velocity. Federal credibility.</h2>
+          <p class="mt-6 max-w-3xl text-lg leading-8 text-ink/62">ProofPilot is built for organizations where generic AI is too risky, failed pilots are too expensive, and internal teams need a partner who bridges AI, cybersecurity, governance, and operations.</p>
+        </div>
+
+        <div data-bf-stagger class="mt-12 grid gap-6 lg:grid-cols-2">
+          <article class="rounded-[1.15rem] border border-ink/10 bg-white/78 p-8 shadow-line">
+            <div class="flex items-start justify-between gap-5">
+              <div>
+                <p class="small-caps text-xs font-black text-brass">Commercial</p>
+                <h3 class="mt-4 font-display text-4xl font-bold tracking-[-.045em]">MarginProof</h3>
+              </div>
+              <span class="rounded-full bg-moss px-3 py-1 text-xs font-extrabold text-pine">Operating leverage</span>
+            </div>
+            <p class="mt-5 text-base leading-8 text-ink/65">For PE-backed service companies, vertical SaaS teams, and operations-heavy businesses — insurance, healthcare operations, legal, staffing, logistics, finance ops — with expensive manual work that AI should already be doing.</p>
+            <div class="mt-7 divide-y divide-ink/10 border-t border-ink/15">
+              <div class="grid gap-1 py-4 sm:grid-cols-[.42fr_.58fr]"><p class="font-bold">Intake &amp; triage</p><p class="text-sm leading-6 text-ink/55">Route document-heavy queues faster, with review where it matters.</p></div>
+              <div class="grid gap-1 py-4 sm:grid-cols-[.42fr_.58fr]"><p class="font-bold">Document &amp; case review</p><p class="text-sm leading-6 text-ink/55">Claims, contracts, and policies summarized against real criteria.</p></div>
+              <div class="grid gap-1 py-4 sm:grid-cols-[.42fr_.58fr]"><p class="font-bold">Knowledge workflows</p><p class="text-sm leading-6 text-ink/55">Institutional knowledge retrieved, drafted, verified, and routed.</p></div>
+              <div class="grid gap-1 py-4 sm:grid-cols-[.42fr_.58fr]"><p class="font-bold">Sales &amp; service ops</p><p class="text-sm leading-6 text-ink/55">CRM enrichment, support resolution, and revenue recovery.</p></div>
+            </div>
+          </article>
+
+          <article class="rounded-[1.15rem] border border-ink/10 bg-ink p-8 text-paper shadow-soft">
+            <div class="flex items-start justify-between gap-5">
+              <div>
+                <p class="small-caps text-xs font-black text-chalk/60">Federal &amp; GovCon</p>
+                <h3 class="mt-4 font-display text-4xl font-bold tracking-[-.045em]">CaptureProof</h3>
+              </div>
+              <span class="rounded-full bg-white/10 px-3 py-1 text-xs font-extrabold text-chalk">Secure by design</span>
+            </div>
+            <p class="mt-5 text-base leading-8 text-paper/65">For federal contractors, cleared programs, agencies, and regulated mission teams that need auditable AI without uncontrolled sensitive-data exposure. ProofOS Private deploys to GovCloud, disconnected, and air-gapped environments.</p>
+            <div class="mt-7 divide-y divide-white/10 border-t border-white/15">
+              <div class="grid gap-1 py-4 sm:grid-cols-[.42fr_.58fr]"><p class="font-bold">RFP analysis</p><p class="text-sm leading-6 text-paper/55">Compliance matrices, outlines, and requirement traceability.</p></div>
+              <div class="grid gap-1 py-4 sm:grid-cols-[.42fr_.58fr]"><p class="font-bold">Proposal acceleration</p><p class="text-sm leading-6 text-paper/55">Past performance, resume tailoring, red-team review.</p></div>
+              <div class="grid gap-1 py-4 sm:grid-cols-[.42fr_.58fr]"><p class="font-bold">CUI-aware workflows</p><p class="text-sm leading-6 text-paper/55">Data boundaries, access controls, and audit discipline.</p></div>
+              <div class="grid gap-1 py-4 sm:grid-cols-[.42fr_.58fr]"><p class="font-bold">Cyber documentation</p><p class="text-sm leading-6 text-paper/55">Policy, evidence, incident, and control support.</p></div>
+            </div>
+
+            <div class="mt-7 rounded-lg border border-brass/35 bg-brass/15 p-5">
+              <p class="small-caps text-[11px] font-black text-chalk/70">The live demonstration</p>
+              <p class="mt-3 text-sm font-bold leading-7 text-paper/85">
+                <span class="demo-step">Public RFP</span><span class="demo-step">Compliance matrix</span><span class="demo-step">Proposal outline</span><span class="demo-step">Red-team review</span><span class="demo-step">Executive risk memo</span>
+              </p>
+              <p class="mt-3 text-sm leading-6 text-paper/58">We run this end-to-end in the briefing, on a real public solicitation. No slides.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- From the founder (video) -->
+    <section id="founder" class="px-5 py-20 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-7xl">
+        <div class="grid gap-10 lg:grid-cols-[.9fr_1.1fr] lg:items-center lg:gap-14">
+          <div data-bf class="rule">
+            <p class="small-caps text-xs font-black text-pine">§ 08 — From the founder</p>
+            <h2 class="mt-4 font-display text-5xl font-bold leading-[.98] tracking-[-.055em] sm:text-6xl">No sales team. The founder shows you the system.</h2>
+            <p class="mt-6 text-base leading-8 text-ink/62">ProofPilot is founder-delivered. Lloyd Clark, Ph.D. — the AI PhD you brief — is the person who designs the data boundary, builds the workflow, and stands behind the evaluation numbers. In this walkthrough, a public RFP goes through the full CaptureProof pipeline — live, on real software.</p>
+            <a href="#contact" class="button-arrow mt-8 inline-flex items-center text-sm font-black text-pine hover:text-ink">
+              Then see it on your own workflow
+              <svg class="ml-1 h-4 w-4" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h11m0 0-4-4m4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+
+          <div data-bf style="--bf-delay:.15s" class="dark-card overflow-hidden rounded-[1.15rem] p-2">
+            <!--
+              FOUNDER VIDEO SLOT
+              When your video is ready, delete the div with id="video-fallback" below and
+              uncomment ONE of these two options.
+
+              Option A — self-hosted mp4 (recommended: keeps visitors on your page):
+              <video controls preload="metadata" poster="founder-poster.jpg" class="aspect-video w-full rounded-[.9rem] bg-ink object-cover">
+                <source src="founder-walkthrough.mp4" type="video/mp4" />
+                <track kind="captions" src="founder-walkthrough.vtt" srclang="en" label="English" />
+              </video>
+
+              Option B — unlisted YouTube/Vimeo embed:
+              <div class="aspect-video w-full overflow-hidden rounded-[.9rem]">
+                <iframe class="h-full w-full" src="https://www.youtube-nocookie.com/embed/VIDEO_ID?rel=0&modestbranding=1" title="ProofPilot founder walkthrough" allow="encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+              </div>
+            -->
+            <div id="video-fallback" class="aspect-video w-full rounded-[.9rem] bg-ink p-6 text-paper sm:p-8">
+              <div class="flex h-full flex-col justify-between">
+                <div class="flex items-center justify-between">
+                  <p class="small-caps text-[11px] font-black text-chalk/60">Founder walkthrough</p>
+                  <span class="rounded-full border border-white/15 px-3 py-1 text-xs font-bold text-paper/70">≈ 3 minutes</span>
+                </div>
+                <div>
+                  <p class="font-display text-3xl font-bold leading-[1.05] tracking-[-.045em] text-paper sm:text-4xl">Public RFP → compliance matrix → proposal outline → red-team review → executive risk memo.</p>
+                  <p class="mt-4 text-sm leading-7 text-paper/55">Recorded on real software, narrated by the founder. Ask for the live version in your briefing.</p>
+                </div>
+                <div class="flex items-center gap-3">
+                  <span class="flex h-11 w-11 items-center justify-center rounded-full bg-paper text-ink">
+                    <svg class="ml-0.5 h-4 w-4" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 2.5v11l9-5.5-9-5.5z"/></svg>
+                  </span>
+                  <p class="text-sm font-bold text-paper/75">Watch how a stalled pilot becomes a governed workflow</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Proof -->
+    <section id="proof" class="px-5 py-20 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-7xl">
+        <div class="grid gap-12 lg:grid-cols-[.78fr_1.22fr] lg:items-start lg:gap-16">
+          <div data-bf class="rule lg:sticky lg:top-28">
+            <p class="small-caps text-xs font-black text-pine">§ 09 — Board-level proof</p>
+            <h2 class="mt-4 font-display text-5xl font-bold leading-[.98] tracking-[-.055em] sm:text-6xl">The market pain is documented. The fix is implementation.</h2>
+            <p class="mt-6 text-base leading-8 text-ink/62">Independent research validates what most executive teams already suspect: AI value is not blocked by model quality. It is blocked by integration, organizational learning, governance, and adoption.</p>
+          </div>
+
+          <div data-bf-stagger class="space-y-5">
+            <div class="rounded-[1.15rem] border border-ink/10 bg-white/78 p-8 shadow-line">
+              <p class="small-caps text-xs font-black text-brass">External proof point</p>
+              <p class="mt-4 font-display text-4xl font-bold leading-[1.04] tracking-[-.045em]">MIT NANDA's "GenAI Divide," as covered by Fortune, found that only about 5% of enterprise GenAI pilots achieved rapid revenue acceleration.</p>
+              <p class="mt-5 text-base leading-8 text-ink/62">The same coverage points to flawed enterprise integration and a "learning gap" — not model capability — as the core reasons pilots stall, and reports that externally partnered deployments succeeded roughly twice as often as internal-only builds. That maps directly to ProofPilot's mandate: integrate AI into the workflow, govern it, train the users, and measure whether it works.</p>
+              <a href="https://fortune.com/2025/08/18/mit-report-95-percent-generative-ai-pilots-at-companies-failing-cfo/" target="_blank" rel="noopener" class="button-arrow mt-6 inline-flex items-center text-sm font-black text-pine hover:text-ink">
+                Read the Fortune coverage
+                <svg class="ml-1 h-4 w-4" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 15 15 5m0 0H7m8 0v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+            </div>
+
+            <div class="grid gap-5 sm:grid-cols-2">
+              <div class="rounded-[1.15rem] border border-ink/10 bg-white/78 p-7 shadow-line">
+                <p class="small-caps text-xs font-black text-brass">Economy signal</p>
+                <p class="mt-4 font-display text-3xl font-bold tracking-[-.045em]">A selective-hiring economy favors workflow leverage.</p>
+                <p class="mt-3 text-sm leading-7 text-ink/62">Today's executive buyer is not funding AI theater. They need operating leverage, margin protection, and selective automation that does not create unmanaged risk.</p>
+                <a href="https://www.federalreserve.gov/monetarypolicy/beigebook202605-summary.htm" target="_blank" rel="noopener" class="mt-5 inline-flex text-xs font-black uppercase tracking-[.16em] text-pine hover:text-ink">Source: Federal Reserve Beige Book</a>
+              </div>
+              <div class="rounded-[1.15rem] border border-ink/10 bg-white/78 p-7 shadow-line">
+                <p class="small-caps text-xs font-black text-brass">Adoption signal</p>
+                <p class="mt-4 font-display text-3xl font-bold tracking-[-.045em]">AI use is real, but still uneven.</p>
+                <p class="mt-3 text-sm leading-7 text-ink/62">Census Bureau BTOS data shows adoption rising with company size — pointing to a clear first buyer: larger, process-heavy organizations with budget and governance pressure.</p>
+                <a href="https://www.census.gov/library/stories/2026/05/ai-use-businesses.html" target="_blank" rel="noopener" class="mt-5 inline-flex text-xs font-black uppercase tracking-[.16em] text-pine hover:text-ink">Source: U.S. Census Bureau</a>
+              </div>
+            </div>
+
+            <div class="rounded-[1.15rem] border border-ink/10 bg-white/78 p-8 shadow-line">
+              <p class="small-caps text-xs font-black text-pine">The one-line case</p>
+              <blockquote class="mt-4 font-display text-4xl font-bold leading-[1.04] tracking-[-.045em] text-ink">
+                "Most AI pilots never become operating capability. ProofPilot fixes the integration, governance, and adoption layer."
+              </blockquote>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Operating model -->
+    <section class="px-5 py-20 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-7xl">
+        <div data-bf class="rounded-[1.4rem] border border-ink/10 bg-white/80 p-8 shadow-line sm:p-10 lg:p-14">
+          <div class="grid gap-10 lg:grid-cols-[.82fr_1.18fr] lg:items-center">
+            <div>
+              <p class="small-caps text-xs font-black text-pine">§ 10 — Operating model</p>
+              <h2 class="mt-4 font-display text-5xl font-bold leading-[.98] tracking-[-.055em]">Not AI theater. Production implementation.</h2>
+              <p class="mt-6 text-base leading-8 text-ink/62">No strategy decks that end at the deck. No demos that never meet real data. No assumption that a chatbot is the right interface. We design around the actual workflow, test against real cases, and ship with oversight built in.</p>
+            </div>
+            <div class="grid gap-x-10 gap-y-8 sm:grid-cols-2">
+              <div class="border-t-2 border-ink pt-4"><p class="font-black">Workflow economics</p><p class="mt-2 text-sm leading-6 text-ink/60">Cycle time, cost, quality, throughput, revenue, and risk baseline.</p></div>
+              <div class="border-t-2 border-ink pt-4"><p class="font-black">Secure architecture</p><p class="mt-2 text-sm leading-6 text-ink/60">Data classification, access control, secure integrations, audit logs.</p></div>
+              <div class="border-t-2 border-ink pt-4"><p class="font-black">Evals &amp; monitoring</p><p class="mt-2 text-sm leading-6 text-ink/60">Golden examples, failure-mode testing, regression checks, usage visibility.</p></div>
+              <div class="border-t-2 border-ink pt-4"><p class="font-black">Adoption system</p><p class="mt-2 text-sm leading-6 text-ink/60">User training, SOPs, manager ownership, and scale/no-scale criteria.</p></div>
+            </div>
+          </div>
+
+          <div class="mt-10 border-t border-ink/10 pt-8">
+            <p class="small-caps text-[11px] font-black text-brass">Governance frameworks we design against</p>
+            <div class="mt-4 flex flex-wrap gap-2 text-xs font-bold text-ink/62">
+              <span class="rounded-full border border-ink/10 bg-pearl px-4 py-2 shadow-line">NIST AI Risk Management Framework</span>
+              <span class="rounded-full border border-ink/10 bg-pearl px-4 py-2 shadow-line">NIST AI 600-1 (GenAI Profile)</span>
+              <span class="rounded-full border border-ink/10 bg-pearl px-4 py-2 shadow-line">NIST SP 800-171 Rev. 3</span>
+              <span class="rounded-full border border-ink/10 bg-pearl px-4 py-2 shadow-line">CMMC</span>
+              <span class="rounded-full border border-ink/10 bg-pearl px-4 py-2 shadow-line">OWASP Top 10 for LLM Applications</span>
+              <span class="rounded-full border border-ink/10 bg-pearl px-4 py-2 shadow-line">MITRE ATLAS</span>
+            </div>
+            <p class="mt-4 text-xs leading-6 text-ink/45">These references describe our design methodology. They are not certifications, and no endorsement by any framework body is implied.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Founder credibility -->
+    <section class="px-5 py-20 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-7xl">
+        <div data-bf-stagger class="grid gap-8 lg:grid-cols-[1.1fr_.9fr] lg:items-stretch">
+          <div class="dark-card rounded-[1.4rem] p-8 text-paper sm:p-10 lg:p-12">
+            <p class="small-caps text-xs font-black text-chalk/60">§ 11 — Why ProofPilot</p>
+            <h2 class="mt-5 font-display text-5xl font-bold leading-[.98] tracking-[-.055em] sm:text-6xl">A builder in the boardroom.</h2>
+            <p class="mt-6 max-w-2xl text-base leading-8 text-paper/64">ProofPilot was founded by <strong class="text-paper">Lloyd Clark, Ph.D.</strong> — founder and CEO of Federal.AI, twenty-plus years across AI/ML, large-scale systems, and network security, and a builder who has operated inside cleared environments, sat across from CISOs, and carried responsibility for sensitive data. He still writes the code.</p>
+            <p class="mt-4 max-w-2xl text-base leading-8 text-paper/64">He is also an instrument-rated commercial pilot and certified flight instructor. ProofPilot engagements run the way a cockpit runs: checklists, disciplined execution, redundancy, and respect for failure modes.</p>
+            <div class="mt-8 space-y-4 border-t border-white/10 pt-7">
+              <p class="small-caps text-[11px] font-black text-chalk/60">Operating doctrine</p>
+              <div class="grid gap-x-8 gap-y-3 text-sm leading-6 text-paper/70 sm:grid-cols-2">
+                <p><span class="font-display text-lg font-bold text-chalk">01</span>&ensp;The person you brief is the person who builds.</p>
+                <p><span class="font-display text-lg font-bold text-chalk">02</span>&ensp;Working software over slideware.</p>
+                <p><span class="font-display text-lg font-bold text-chalk">03</span>&ensp;Governance is a feature, not a tax.</p>
+                <p><span class="font-display text-lg font-bold text-chalk">04</span>&ensp;If it isn't measured, it didn't happen.</p>
+                <p><span class="font-display text-lg font-bold text-chalk">05</span>&ensp;Scale only what proves.</p>
+              </div>
+            </div>
+          </div>
+          <div class="border-t-2 border-ink pt-7 lg:pt-9">
+            <p class="small-caps text-xs font-black text-brass">Founder credentials</p>
+            <div class="mt-6 space-y-4">
+              <div class="flex gap-4"><span class="mt-2 h-2 w-2 shrink-0 rounded-full bg-pine"></span><p class="text-base leading-7 text-ink/68"><strong class="text-ink">Ph.D. in Artificial Intelligence</strong> (Capitol Technology University, LLM focus) and an M.S. in Information Assurance — research depth, practitioner hands.</p></div>
+              <div class="flex gap-4"><span class="mt-2 h-2 w-2 shrink-0 rounded-full bg-pine"></span><p class="text-base leading-7 text-ink/68"><strong class="text-ink">CISSP-ISSEP</strong> with an active security clearance and facility-clearance context for federal and defense industrial base work.</p></div>
+              <div class="flex gap-4"><span class="mt-2 h-2 w-2 shrink-0 rounded-full bg-pine"></span><p class="text-base leading-7 text-ink/68"><strong class="text-ink">Operator, not adviser</strong> — founder and CEO of Federal.AI (forward-deployed AI for defense, aerospace, and national security), founder of BlueRidge.AI (industrial AI), and former CTO of a defense contractor.</p></div>
+              <div class="flex gap-4"><span class="mt-2 h-2 w-2 shrink-0 rounded-full bg-pine"></span><p class="text-base leading-7 text-ink/68"><strong class="text-ink">Federal, GovCon, and regulated-market fluency</strong> — CUI handling, NIST 800-171 environments, and capture/proposal operations.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="px-5 pb-24 pt-16 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-7xl">
+        <div data-bf class="relative overflow-hidden rounded-[1.4rem] bg-ink text-paper shadow-soft">
+          <div class="absolute inset-0 opacity-40" style="background-image: radial-gradient(circle at 20% 20%, rgba(229,239,232,.18), transparent 28rem), radial-gradient(circle at 82% 10%, rgba(181,138,84,.18), transparent 24rem);"></div>
+          <div class="relative grid gap-0 lg:grid-cols-[1fr_.85fr]">
+            <div class="p-8 sm:p-12 lg:p-14">
+              <p class="small-caps text-xs font-black text-chalk/60">§ 12 — Next step</p>
+              <h2 class="mt-5 max-w-3xl font-display text-5xl font-bold leading-[.96] tracking-[-.055em] sm:text-6xl">Bring one AI workflow to the boardroom.</h2>
+              <p class="mt-6 max-w-2xl text-lg leading-8 text-paper/66">If your team has an expensive review, intake, support, sales, or knowledge workflow that should not still be manual, a 30-minute briefing will tell you whether AI can produce measurable value there — and what it would take to deploy safely. If it is not a fit, you will still leave with a clear point of view.</p>
+              <div class="mt-9 flex flex-col gap-3 sm:flex-row">
+                <!-- REPLACE-SCHEDULER: swap href with your live scheduling link before launch -->
+                <a href="mailto:lc@federal.ai?subject=Executive%20Briefing%20Request%20%E2%80%94%20ProofPilot%20AI&body=Name%3A%0ACompany%3A%0ARole%3A%0AOne%20AI%20use%20case%20or%20stalled%20pilot%20worth%20discussing%3A%0A" class="button-arrow inline-flex items-center justify-center rounded-full bg-paper px-7 py-4 text-base font-black text-ink transition hover:-translate-y-0.5 hover:bg-chalk">
+                  Request executive briefing
+                  <svg class="ml-2 h-5 w-5" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h11m0 0-4-4m4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+                <a href="mailto:lc@federal.ai?subject=ProofPilot%20AI%20%E2%80%94%20Question" class="inline-flex items-center justify-center rounded-full border border-white/15 px-7 py-4 text-base font-black text-paper transition hover:-translate-y-0.5 hover:bg-white/10">
+                  Email the founder
+                </a>
+              </div>
+              <p class="mt-6 text-sm text-paper/45">Briefings are limited to a small number of executive teams per month.</p>
+            </div>
+
+            <div class="border-t border-white/10 p-8 sm:p-12 lg:border-l lg:border-t-0 lg:p-14">
+              <div class="rounded-[1.15rem] border border-white/10 bg-white/[.055] p-6 sm:p-7">
+                <p class="small-caps text-xs font-black text-chalk/60">Request an executive briefing</p>
+                <!-- Form posts via FormSubmit to lc@federal.ai — first submission triggers a one-time
+                     activation email; click the link in it once and the form is live. See README. -->
+                <form action="https://formsubmit.co/lc@federal.ai" method="POST" class="mt-5 space-y-4">
+                  <input type="hidden" name="_subject" value="Executive Briefing Request — ProofPilot AI" />
+                  <input type="hidden" name="_template" value="table" />
+                  <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
+                  <div>
+                    <label class="text-xs font-bold text-paper/60" for="cf-name">Name</label>
+                    <input id="cf-name" name="Name" type="text" required class="mt-1.5 w-full rounded-lg border border-white/15 bg-ink/60 px-4 py-3 text-sm text-paper outline-none placeholder:text-paper/30 focus:border-chalk/60" placeholder="Your name" />
+                  </div>
+                  <div>
+                    <label class="text-xs font-bold text-paper/60" for="cf-email">Work email</label>
+                    <input id="cf-email" name="Email" type="email" required class="mt-1.5 w-full rounded-lg border border-white/15 bg-ink/60 px-4 py-3 text-sm text-paper outline-none placeholder:text-paper/30 focus:border-chalk/60" placeholder="you@company.com" />
+                  </div>
+                  <div>
+                    <label class="text-xs font-bold text-paper/60" for="cf-org">Organization &amp; role</label>
+                    <input id="cf-org" name="Organization and role" type="text" class="mt-1.5 w-full rounded-lg border border-white/15 bg-ink/60 px-4 py-3 text-sm text-paper outline-none placeholder:text-paper/30 focus:border-chalk/60" placeholder="Company · Title" />
+                  </div>
+                  <div>
+                    <label class="text-xs font-bold text-paper/60" for="cf-msg">One workflow or stalled pilot worth discussing</label>
+                    <textarea id="cf-msg" name="Workflow" rows="3" class="mt-1.5 w-full rounded-lg border border-white/15 bg-ink/60 px-4 py-3 text-sm text-paper outline-none placeholder:text-paper/30 focus:border-chalk/60" placeholder="e.g., proposal compliance review still takes our team two weeks per RFP"></textarea>
+                  </div>
+                  <button type="submit" class="button-arrow inline-flex w-full items-center justify-center rounded-full bg-paper px-6 py-3.5 text-sm font-black text-ink transition hover:bg-chalk">
+                    Request briefing
+                    <svg class="ml-2 h-4 w-4" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h11m0 0-4-4m4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </button>
+                  <p class="text-[11px] leading-5 text-paper/40">Goes directly to the founder. Expect a reply within one business day.</p>
+                </form>
+                <p class="small-caps mt-6 border-t border-white/10 pt-4 text-[10px] font-black leading-5 tracking-[.16em] text-paper/40">Agenda: pilot inventory · workflow economics · risk boundary · Sprint go/no-go</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-ink/10 bg-pearl px-5 py-10 sm:px-6 lg:px-8">
+    <div class="mx-auto flex max-w-7xl flex-col gap-6 text-sm text-ink/55 md:flex-row md:items-center md:justify-between">
+      <div>
+        <p class="font-black text-ink">ProofPilot AI</p>
+        <p class="mt-1">From AI pilot to operating advantage.</p>
+      </div>
+      <div class="flex flex-wrap gap-x-5 gap-y-2 text-xs font-bold uppercase tracking-[.14em]">
+        <a class="hover:text-ink" href="#proofos">ProofOS</a>
+        <a class="hover:text-ink" href="#deployment">Deployment</a>
+        <a class="hover:text-ink" href="#security">Security</a>
+        <a class="hover:text-ink" href="#sprint">Sprint</a>
+        <a class="hover:text-ink" href="#contact">Contact</a>
+      </div>
+    </div>
+    <div class="mx-auto mt-8 max-w-7xl text-xs leading-6 text-ink/42">
+      Market-context references: Fortune coverage of MIT NANDA's "The GenAI Divide"; Federal Reserve Beige Book (May 2026); U.S. Census Bureau BTOS AI-use analysis (May 2026). References are included for market context only; no affiliation with or endorsement by MIT, Fortune, or any government body is implied.
+    </div>
+  </footer>
+
+  <script>
+    /*
+      Vanilla ports of two Magic UI components (21st.dev):
+      - BlurFade: opacity/translate/blur entrance, IntersectionObserver-triggered, once, -50px margin
+      - NumberTicker: spring count-up (stiffness 100, damping 60), Intl.NumberFormat, tabular-nums
+      All motion is gated on prefers-reduced-motion via the .motion-ok class set in <head>.
+    */
+    (function () {
+      if (!document.documentElement.classList.contains('motion-ok')) return;
+
+      // --- BlurFade ---
+      document.querySelectorAll('[data-bf-stagger]').forEach(function (container) {
+        Array.prototype.forEach.call(container.children, function (child, i) {
+          child.classList.add('bf-child');
+          child.style.setProperty('--bf-delay', (0.04 + i * 0.09).toFixed(2) + 's');
+        });
+      });
+
+      var bfObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('bf-in');
+            bfObserver.unobserve(entry.target);
+          }
+        });
+      }, { rootMargin: '-50px 0px -50px 0px' });
+
+      // Anything already in the viewport at load reveals immediately (entrance
+      // transition still plays). Only below-fold elements wait on the observer.
+      // Guarantees the hero is never blank at the top of the page.
+      var viewportH = window.innerHeight;
+      document.querySelectorAll('[data-bf], .bf-child').forEach(function (el) {
+        var rect = el.getBoundingClientRect();
+        if (rect.top < viewportH && rect.bottom > 0) {
+          requestAnimationFrame(function () { el.classList.add('bf-in'); });
+        } else {
+          bfObserver.observe(el);
+        }
+      });
+      // Safety net: if anything is still hidden after 2s (observer quirk, odd
+      // scroll restore), reveal it rather than risk invisible content.
+      setTimeout(function () {
+        document.querySelectorAll('[data-bf]:not(.bf-in), .bf-child:not(.bf-in)').forEach(function (el) {
+          var r = el.getBoundingClientRect();
+          if (r.top < window.innerHeight && r.bottom > 0) el.classList.add('bf-in');
+        });
+      }, 2000);
+
+      // --- NumberTicker ---
+      var formatters = {};
+      function formatNum(n, dp) {
+        if (!formatters[dp]) {
+          formatters[dp] = new Intl.NumberFormat('en-US', {
+            minimumFractionDigits: dp, maximumFractionDigits: dp
+          });
+        }
+        return formatters[dp].format(Number(n.toFixed(dp)));
+      }
+
+      function springTo(el, target, dp, delay) {
+        var x = 0, v = 0, stiffness = 100, damping = 60, last = null;
+        el.textContent = formatNum(0, dp);
+        function step(ts) {
+          if (last === null) last = ts;
+          var dt = Math.min((ts - last) / 1000, 0.064);
+          last = ts;
+          var accel = stiffness * (target - x) - damping * v;
+          v += accel * dt;
+          x += v * dt;
+          if (Math.abs(target - x) < 0.005 && Math.abs(v) < 0.01) {
+            el.textContent = formatNum(target, dp);
+            return;
+          }
+          el.textContent = formatNum(x, dp);
+          requestAnimationFrame(step);
+        }
+        setTimeout(function () { requestAnimationFrame(step); }, delay * 1000);
+      }
+
+      var tickerObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            var el = entry.target;
+            tickerObserver.unobserve(el);
+            springTo(
+              el,
+              parseFloat(el.getAttribute('data-ticker')),
+              parseInt(el.getAttribute('data-ticker-dp') || '0', 10),
+              parseFloat(el.getAttribute('data-ticker-delay') || '0.15')
+            );
+          }
+        });
+      }, { threshold: 0.5 });
+
+      document.querySelectorAll('[data-ticker]').forEach(function (el) {
+        tickerObserver.observe(el);
+      });
+    })();
+  </script>
+</body>
+</html>
