@@ -10,6 +10,7 @@
   <meta property="og:type" content="website" />
   <meta name="theme-color" content="#101820" />
   <link rel="canonical" href="https://checkride.ai/" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20120%20120'%3E%3Cpath%20d='M5%2061%20L21%2046%20L35%2061%20L101%201%20L109%208%20L37%2097%20Z'%20fill='%23101820'%20stroke='%23101820'%20stroke-width='3'%20stroke-linejoin='round'/%3E%3Cline%20x1='45'%20y1='79'%20x2='99'%20y2='16'%20stroke='%23f7f3ea'%20stroke-width='4.5'%20stroke-dasharray='12%209'%20stroke-linecap='round'/%3E%3C/svg%3E" />
 
   <!--
     Checkride AI — boardroom landing page
@@ -162,12 +163,12 @@
   <!-- Navigation -->
   <header class="fixed inset-x-0 top-0 z-50 border-b border-ink/10 bg-pearl/88 backdrop-blur-xl">
     <div class="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-6 lg:px-8">
-      <a href="#top" class="group flex items-center gap-3" aria-label="Checkride AI home">
-        <span class="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-[9px] bg-ink font-display text-lg font-bold tracking-tight text-paper shadow-line">
-          <span class="absolute inset-x-0 top-0 h-1/2 bg-white/10"></span>
-          CR
-        </span>
-        <span class="text-base font-black tracking-[-.02em] text-ink">Checkride <span class="font-semibold text-pine">AI</span></span>
+      <a href="#top" class="group flex items-center gap-3" aria-label="Checkride home">
+        <svg viewBox="0 0 120 120" class="h-9 w-9" aria-hidden="true">
+          <path d="M5 61 L21 46 L35 61 L101 1 L109 8 L37 97 Z" fill="#101820" stroke="#101820" stroke-width="3" stroke-linejoin="round"/>
+          <line x1="45" y1="79" x2="99" y2="16" stroke="#f7f3ea" stroke-width="3" stroke-dasharray="10 8" stroke-linecap="round"/>
+        </svg>
+        <span class="font-display text-[1.35rem] font-bold tracking-[-.035em] text-ink">Checkride<span class="text-pine">.ai</span></span>
       </a>
 
       <nav class="hidden items-center gap-8 text-[13px] font-bold text-ink/62 md:flex">
@@ -848,9 +849,15 @@
 
   <footer class="border-t border-ink/10 bg-pearl px-5 py-10 sm:px-6 lg:px-8">
     <div class="mx-auto flex max-w-7xl flex-col gap-6 text-sm text-ink/55 md:flex-row md:items-center md:justify-between">
-      <div>
-        <p class="font-black text-ink">Checkride</p>
-        <p class="mt-1">Secure enterprise AI operations. From AI pilot to operating advantage.</p>
+      <div class="flex items-start gap-3">
+        <svg viewBox="0 0 120 120" class="mt-0.5 h-7 w-7 shrink-0" aria-hidden="true">
+          <path d="M5 61 L21 46 L35 61 L101 1 L109 8 L37 97 Z" fill="#101820" stroke="#101820" stroke-width="3" stroke-linejoin="round"/>
+          <line x1="45" y1="79" x2="99" y2="16" stroke="#f7f3ea" stroke-width="3" stroke-dasharray="10 8" stroke-linecap="round"/>
+        </svg>
+        <div>
+          <p class="font-display text-lg font-bold tracking-[-.03em] text-ink">Checkride<span class="text-pine">.ai</span></p>
+          <p class="mt-1">Secure enterprise AI operations. From AI pilot to operating advantage.</p>
+        </div>
       </div>
       <div class="flex flex-wrap gap-x-5 gap-y-2 text-xs font-bold uppercase tracking-[.14em]">
         <a class="hover:text-ink" href="#proofos">ProofOS</a>
