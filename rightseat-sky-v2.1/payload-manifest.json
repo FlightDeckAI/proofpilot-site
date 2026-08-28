@@ -1,0 +1,16 @@
+{
+  "version": "2.1.0",
+  "encoding": "base64(gzip(html))",
+  "files": [
+    "payload-0a.txt",
+    "payload-0rest.txt",
+    "payload-1.txt",
+    "payload-2a.txt",
+    "payload-2b.txt",
+    "payload-2c.txt",
+    "payload-2d.txt",
+    "payload-3.txt"
+  ],
+  "htmlBytes": 85042,
+  "htmlSha256": "1594d97d1b94086a05740bddcb5e6810f1bb0d074a6bf89a02ffb77225d9ad40"
+}
